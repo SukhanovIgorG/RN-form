@@ -1,3 +1,4 @@
+import { Controller, useForm } from "react-hook-form";
 import {
   StyleSheet,
   Text,
@@ -9,16 +10,97 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      fio: "",
+      email: "",
+      phone: "",
+      gender: "",
+    },
+  });
+  const onSubmit = (data: any) => console.log(data);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.formContainer}>
         <Text style={styles.title}>Форма</Text>
-        <TextInput style={styles.input} placeholder="ФИО" />
-        <TextInput style={styles.input} placeholder="email" />
-        <TextInput style={styles.input} placeholder="телефон" />
-        <TextInput style={styles.input} placeholder="пол" />
+        <Controller
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              style={styles.input}
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              placeholder="ФИО"
+            />
+          )}
+          name="fio"
+        />
+        {errors.fio && <Text>This is required.</Text>}
+
+        <Controller
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              style={styles.input}
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              placeholder="email"
+            />
+          )}
+          name="email"
+        />
+        {errors.email && <Text>This is required.</Text>}
+
+        <Controller
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              style={styles.input}
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              placeholder="телефон"
+            />
+          )}
+          name="phone"
+        />
+        {errors.phone && <Text>This is required.</Text>}
+
+        <Controller
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              style={styles.input}
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              placeholder="пол"
+            />
+          )}
+          name="gender"
+        />
+        {errors.gender && <Text>This is required.</Text>}
       </View>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={handleSubmit(onSubmit)}>
         <Text>Отправить</Text>
       </TouchableOpacity>
     </SafeAreaView>
