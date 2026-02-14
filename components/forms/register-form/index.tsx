@@ -1,33 +1,12 @@
 import { Button, FormInput, FormSelect, FormSwitch } from "@/components";
 import { SPACING } from "@/tokens";
+import { normalizePhone } from "@/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import { StyleSheet, View } from "react-native";
-import * as z from "zod";
-import { Divider } from "../ui";
 
-const schema = z.object({
-  fio: z
-    .string()
-    .min(3, "ФИО должно быть не менее 3 символов")
-    .regex(/^[a-zA-Zа-яА-ЯёЁ\s-]+$/, "Только буквы/пробел/дефис"),
-  email: z.string().email("Неверный email"),
-  phone: z
-    .string()
-    .regex(/^\+7\d{10}$/, "Телефон должен быть в формате +7XXXXXXXXXX"),
-  gender: z.string(),
-  agreement: z
-    .boolean()
-    .refine((value) => value === true, "Согласие с условиями обязательно"),
-});
-
-const defaultValues = {
-  fio: "",
-  email: "",
-  phone: "",
-  gender: "male",
-  agreement: false,
-};
+import { Divider } from "../../ui";
+import { registerDefaultValues, registerSchema } from "./constants";
 
 export const RegisterForm = () => {
   const {
@@ -35,8 +14,8 @@ export const RegisterForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    defaultValues,
-    resolver: zodResolver(schema),
+    defaultValues: registerDefaultValues,
+    resolver: zodResolver(registerSchema),
     mode: "onBlur",
   });
 
@@ -88,7 +67,11 @@ export const RegisterForm = () => {
           render={({ field: { onChange, onBlur, value } }) => (
             <FormInput
               error={errors.phone?.message}
-              onBlur={onBlur}
+              onBlur={() => {
+                const normalized = normalizePhone(value);
+                onChange(normalized);
+                onBlur();
+              }}
               onChangeText={onChange}
               value={value}
               placeholder="Телефон"

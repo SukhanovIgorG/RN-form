@@ -37,8 +37,6 @@ export const FormInput = ({
 }: FormInputProps) => {
   const progress = useSharedValue(!!value ? 1 : 0);
 
-  console.log(rest);
-
   const handleFocus = (e: FocusEvent) => {
     progress.value = withTiming(1, { duration: 150 });
     onFocus?.(e);
