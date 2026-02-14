@@ -1,3 +1,4 @@
 export { Button } from "./button";
-export { FormInput } from "./form-input";
-export { FormSwitch } from "./form-switch";
+export { ErrorText } from "./error-text";
+export { Input } from "./input";
+export { Switch } from "./switch";

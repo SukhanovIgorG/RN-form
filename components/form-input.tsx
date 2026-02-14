@@ -1,11 +1,9 @@
 import { COLORS, FONT_SIZES, SPACING } from "@/tokens";
 import {
-  BlurEvent,
-  FocusEvent,
-  StyleSheet,
-  Text,
-  TextInput,
+  type BlurEvent,
+  type FocusEvent,
   type TextInputProps,
+  StyleSheet,
   View,
 } from "react-native";
 import Animated, {
@@ -14,6 +12,7 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
+import { ErrorText, Input } from "./ui";
 
 interface FormInputProps extends TextInputProps {
   error?: string;
@@ -56,14 +55,13 @@ export const FormInput = ({
       <Animated.Text style={[styles.label, labelStyle]}>
         {placeholder + (required ? "*" : "")}
       </Animated.Text>
-      <TextInput
-        style={styles.input}
+      <Input
         onFocus={handleFocus}
         onBlur={handleBlur}
         value={value}
         {...rest}
       />
-      {error && <Text style={styles.error}>{error}</Text>}
+      {error && <ErrorText message={error} />}
     </View>
   );
 };
@@ -86,23 +84,5 @@ const styles = StyleSheet.create({
   labelInactive: {
     fontSize: 16,
     top: SPACING.lg,
-  },
-  input: {
-    borderTopWidth: 0,
-    borderLeftWidth: 0,
-    borderRightWidth: 0,
-    borderBottomWidth: 1,
-    borderStyle: "solid",
-    borderColor: COLORS.lightGray,
-    borderRadius: SPACING.xs,
-    paddingVertical: SPACING.sm,
-    height: 56,
-    width: "100%",
-  },
-  error: {
-    paddingVertical: 0,
-    alignSelf: "flex-start",
-    fontSize: 12,
-    color: COLORS.error,
   },
 });

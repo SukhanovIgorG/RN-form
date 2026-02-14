@@ -1,5 +1,6 @@
 import { COLORS, SPACING } from "@/tokens";
-import { StyleSheet, Switch, SwitchProps, Text, View } from "react-native";
+import { StyleSheet, SwitchProps, Text, View } from "react-native";
+import { ErrorText, Switch } from "./ui";
 
 interface FormSwitchProps extends SwitchProps {
   error?: string;
@@ -19,7 +20,7 @@ export const FormSwitch = ({ error, label, ...rest }: FormSwitchProps) => {
           {...rest}
         />
       </View>
-      {error && <Text style={styles.error}>{error}</Text>}
+      {error && <ErrorText message={error} />}
     </View>
   );
 };
@@ -35,11 +36,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     width: "100%",
-  },
-  error: {
-    paddingVertical: 0,
-    alignSelf: "flex-start",
-    fontSize: 12,
-    color: COLORS.error,
   },
 });
