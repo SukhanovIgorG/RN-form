@@ -1,3 +1,4 @@
+export { BottomSheetModal } from "./bottom-sheet-modal";
 export { Button } from "./button";
 export { Divider } from "./divider";
 export { ErrorText } from "./error-text";
