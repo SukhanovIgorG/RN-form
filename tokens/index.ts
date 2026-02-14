@@ -13,3 +13,10 @@ export const SPACING = {
   md: 16,
   lg: 24,
 };
+
+export const FONT_SIZES = {
+  xs: 12,
+  sm: 14,
+  md: 16,
+  lg: 24,
+};

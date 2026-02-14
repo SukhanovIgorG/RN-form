@@ -1,1 +1,1 @@
-export { FormInput, FormSwitch } from "./ui";
+export { Button, FormInput, FormSwitch } from "./ui";

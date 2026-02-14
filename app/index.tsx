@@ -1,8 +1,8 @@
-import { FormInput, FormSwitch } from "@/components";
-import { COLORS, SPACING } from "@/tokens";
+import { Button, FormInput, FormSwitch } from "@/components";
+import { FONT_SIZES, SPACING } from "@/tokens";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as z from "zod";
 
@@ -35,9 +35,14 @@ export default function HomeScreen() {
     },
     resolver: zodResolver(schema),
   });
-  const onSubmit = (data: any) => console.log(data);
 
-  console.log("errors", errors);
+  const onSubmit = (data: any) => {
+    if (errors) {
+      return;
+    } else {
+      console.log(data);
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -115,9 +120,7 @@ export default function HomeScreen() {
         />
       </View>
 
-      <TouchableOpacity style={styles.button} onPress={handleSubmit(onSubmit)}>
-        <Text style={styles.buttonText}>Отправить</Text>
-      </TouchableOpacity>
+      <Button title="Сохранить" onPress={handleSubmit(onSubmit)} />
     </SafeAreaView>
   );
 }
@@ -135,21 +138,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    fontSize: 24,
+    fontSize: FONT_SIZES.lg,
     fontWeight: "bold",
-  },
-
-  button: {
-    backgroundColor: COLORS.brandDefault,
-    color: COLORS.white,
-    padding: SPACING.sm,
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%",
-    height: 56,
-    fontSize: 16,
-  },
-  buttonText: {
-    color: COLORS.white,
   },
 });
