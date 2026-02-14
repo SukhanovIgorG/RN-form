@@ -1,6 +1,6 @@
 import { RegisterForm } from "@/components";
 import { Typography, TypographyVariant } from "@/components/ui";
-import { FONT_SIZES, SPACING } from "@/tokens";
+import { SPACING } from "@/tokens";
 import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -23,8 +23,6 @@ const styles = StyleSheet.create({
     gap: SPACING.sm,
   },
   title: {
-    fontSize: FONT_SIZES.lg,
-    fontWeight: "bold",
     width: "100%",
     textAlign: "center",
     marginBottom: SPACING.sm,
