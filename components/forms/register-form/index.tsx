@@ -3,13 +3,14 @@ import { SPACING } from "@/tokens";
 import { normalizePhone } from "@/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
-import { StyleSheet, View } from "react-native";
+import { Alert, StyleSheet, View } from "react-native";
 
 import { Divider } from "../../ui";
 import { registerDefaultValues, registerSchema } from "./constants";
 
 export const RegisterForm = () => {
   const {
+    reset,
     control,
     handleSubmit,
     formState: { errors },
@@ -20,10 +21,13 @@ export const RegisterForm = () => {
   });
 
   const onSubmit = (data: any) => {
-    if (errors) {
+    const hasErrors = !!Object.keys(errors).length;
+    if (hasErrors) {
       return;
     } else {
       console.log(data);
+      Alert.alert("Успешно", "Форма отправлена");
+      reset();
     }
   };
 

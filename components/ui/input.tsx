@@ -1,4 +1,4 @@
-import { COLORS, SPACING } from "@/tokens";
+import { COLORS, FONT_SIZES, SPACING } from "@/tokens";
 import { StyleSheet, TextInput, TextInputProps } from "react-native";
 
 export const Input = ({ style, ...props }: TextInputProps) => {
@@ -17,5 +17,6 @@ const styles = StyleSheet.create({
     paddingVertical: SPACING.sm,
     height: 56,
     width: "100%",
+    fontSize: FONT_SIZES.md,
   },
 });

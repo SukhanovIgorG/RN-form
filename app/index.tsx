@@ -7,7 +7,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function HomeScreen() {
   return (
     <SafeAreaView style={styles.page}>
-      <Typography style={styles.title} variant={TypographyVariant.h1}>
+      <Typography style={styles.title} variant={TypographyVariant.h2}>
         Форма
       </Typography>
       <RegisterForm />

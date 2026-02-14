@@ -5,6 +5,7 @@ import {
   type TextInputProps,
   type ViewStyle,
   Image,
+  Keyboard,
   StyleSheet,
   Text,
   TextStyle,
@@ -45,7 +46,10 @@ export const FormSelect = ({
       <Text style={styles.label}>{placeholder + (required ? "*" : "")}</Text>
       <TouchableOpacity
         style={styles.select}
-        onPress={() => setIsOpen((prev) => !prev)}
+        onPress={() => {
+          Keyboard.dismiss();
+          setIsOpen((prev) => !prev);
+        }}
       >
         <Typography style={styles.selectContent}>
           {options.find((option) => option.value === value)?.label}
