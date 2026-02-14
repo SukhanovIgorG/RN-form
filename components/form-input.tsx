@@ -17,11 +17,27 @@ import Animated, {
 } from "react-native-reanimated";
 import { ErrorText, Input } from "./ui";
 
+type KeyboardType = "email" | "phone" | "password" | "number" | "text";
+
+const getKeyboardType = (type: KeyboardType) => {
+  switch (type) {
+    case "email":
+      return "email-address";
+    case "phone":
+      return "phone-pad";
+    case "number":
+      return "numeric";
+    default:
+      return "default";
+  }
+};
+
 interface FormInputProps extends TextInputProps {
   error?: string;
   required?: boolean;
   styleContainer?: StyleProp<ViewStyle>;
   inputStyle?: StyleProp<TextStyle>;
+  type?: KeyboardType;
 }
 
 export const FormInput = ({
@@ -33,6 +49,7 @@ export const FormInput = ({
   required,
   styleContainer,
   inputStyle,
+  type = "text",
   ...rest
 }: FormInputProps) => {
   const progress = useSharedValue(!!value ? 1 : 0);
@@ -65,6 +82,8 @@ export const FormInput = ({
         onBlur={handleBlur}
         value={value}
         style={inputStyle}
+        keyboardType={getKeyboardType(type)}
+        secureTextEntry={type === "password" || rest.secureTextEntry}
         {...rest}
       />
       {error && <ErrorText message={error} />}

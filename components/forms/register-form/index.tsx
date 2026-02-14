@@ -60,6 +60,7 @@ export const RegisterForm = () => {
               onChangeText={onChange}
               value={value}
               placeholder="email"
+              type="email"
               required
             />
           )}
@@ -79,6 +80,7 @@ export const RegisterForm = () => {
               onChangeText={onChange}
               value={value}
               placeholder="Телефон"
+              type="phone"
               required
             />
           )}
