@@ -1,4 +1,4 @@
-import { RegisterForm } from "@/components";
+import { RegisterForm } from "@/components/forms";
 import { Typography, TypographyVariant } from "@/components/ui";
 import { SPACING } from "@/tokens";
 import { StyleSheet } from "react-native";

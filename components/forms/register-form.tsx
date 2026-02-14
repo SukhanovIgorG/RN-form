@@ -1,4 +1,4 @@
-import { Button, FormInput, FormSwitch } from "@/components";
+import { Button, FormInput, FormSelect, FormSwitch } from "@/components";
 import { SPACING } from "@/tokens";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
@@ -21,18 +21,21 @@ const schema = z.object({
     .refine((value) => value === true, "Согласие с условиями обязательно"),
 });
 
+const defaultValues = {
+  fio: "",
+  email: "",
+  phone: "",
+  gender: "male",
+  agreement: false,
+};
+
 export const RegisterForm = () => {
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    defaultValues: {
-      fio: "",
-      email: "",
-      phone: "",
-      gender: "мужской",
-    },
+    defaultValues,
     resolver: zodResolver(schema),
     mode: "onBlur",
   });
@@ -88,7 +91,7 @@ export const RegisterForm = () => {
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
-              placeholder="телефон"
+              placeholder="Телефон"
               required
             />
           )}
@@ -98,13 +101,17 @@ export const RegisterForm = () => {
           name="gender"
           control={control}
           render={({ field: { onChange, onBlur, value } }) => (
-            <FormInput
+            <FormSelect
               error={errors.gender?.message}
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
-              placeholder="пол"
+              placeholder="Пол"
               required
+              options={[
+                { label: "Мужской", value: "male" },
+                { label: "Женский", value: "female" },
+              ]}
             />
           )}
         />
