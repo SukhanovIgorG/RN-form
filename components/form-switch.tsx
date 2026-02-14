@@ -1,6 +1,6 @@
 import { COLORS, SPACING } from "@/tokens";
-import { StyleSheet, SwitchProps, Text, View } from "react-native";
-import { ErrorText, Switch } from "./ui";
+import { StyleSheet, SwitchProps, View } from "react-native";
+import { ErrorText, Switch, Typography } from "./ui";
 
 interface FormSwitchProps extends SwitchProps {
   error?: string;
@@ -11,7 +11,7 @@ export const FormSwitch = ({ error, label, ...rest }: FormSwitchProps) => {
   return (
     <View style={styles.inputContainer}>
       <View style={styles.switchContainer}>
-        <Text>{label}</Text>
+        <Typography>{label}</Typography>
         <Switch
           trackColor={{
             false: COLORS.lightGray,
@@ -28,7 +28,6 @@ export const FormSwitch = ({ error, label, ...rest }: FormSwitchProps) => {
 const styles = StyleSheet.create({
   inputContainer: {
     width: "100%",
-    paddingHorizontal: SPACING.sm,
   },
   switchContainer: {
     paddingVertical: SPACING.sm,

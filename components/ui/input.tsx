@@ -1,8 +1,8 @@
 import { COLORS, SPACING } from "@/tokens";
 import { StyleSheet, TextInput, TextInputProps } from "react-native";
 
-export const Input = ({ ...props }: TextInputProps) => {
-  return <TextInput style={styles.input} {...props} />;
+export const Input = ({ style, ...props }: TextInputProps) => {
+  return <TextInput style={[styles.input, style]} {...props} />;
 };
 
 const styles = StyleSheet.create({

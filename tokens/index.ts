@@ -5,6 +5,7 @@ export const COLORS = {
   lightBlue: "#599AF0",
   white: "#FFFFFF",
   brandDefault: "#F80404",
+  text: "#000000",
 };
 
 export const SPACING = {
