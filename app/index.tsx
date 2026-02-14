@@ -34,6 +34,7 @@ export default function HomeScreen() {
       gender: "мужской",
     },
     resolver: zodResolver(schema),
+    mode: "onBlur",
   });
 
   const onSubmit = (data: any) => {
@@ -59,6 +60,7 @@ export default function HomeScreen() {
               onChangeText={onChange}
               value={value}
               placeholder="ФИО"
+              required
             />
           )}
         />
@@ -73,6 +75,7 @@ export default function HomeScreen() {
               onChangeText={onChange}
               value={value}
               placeholder="email"
+              required
             />
           )}
         />
@@ -87,6 +90,7 @@ export default function HomeScreen() {
               onChangeText={onChange}
               value={value}
               placeholder="телефон"
+              required
             />
           )}
         />
@@ -101,6 +105,7 @@ export default function HomeScreen() {
               onChangeText={onChange}
               value={value}
               placeholder="пол"
+              required
             />
           )}
         />

@@ -17,6 +17,7 @@ import Animated, {
 
 interface FormInputProps extends TextInputProps {
   error?: string;
+  required?: boolean;
 }
 
 export const FormInput = ({
@@ -25,9 +26,12 @@ export const FormInput = ({
   onFocus,
   onBlur,
   value,
+  required,
   ...rest
 }: FormInputProps) => {
   const progress = useSharedValue(!!value ? 1 : 0);
+
+  console.log(rest);
 
   const handleFocus = (e: FocusEvent) => {
     progress.value = withTiming(1, { duration: 150 });
@@ -50,7 +54,7 @@ export const FormInput = ({
   return (
     <View style={styles.inputContainer}>
       <Animated.Text style={[styles.label, labelStyle]}>
-        {placeholder}
+        {placeholder + (required ? "*" : "")}
       </Animated.Text>
       <TextInput
         style={styles.input}

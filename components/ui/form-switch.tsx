@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: SPACING.sm,
   },
   switchContainer: {
-    paddingHorizontal: SPACING.sm,
+    paddingVertical: SPACING.sm,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
