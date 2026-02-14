@@ -4,7 +4,6 @@ import {
   type StyleProp,
   type TextInputProps,
   type ViewStyle,
-  Image,
   Keyboard,
   StyleSheet,
   TextStyle,
@@ -17,6 +16,7 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
+import { IconArrow, IconChecked, IconUnchecked } from "./icons";
 import { Divider, ErrorText, Modal, Typography } from "./ui";
 
 interface Option {
@@ -75,10 +75,7 @@ export const FormSelect = ({
         <Typography style={styles.selectContent}>
           {options.find((option) => option.value === value)?.label}
         </Typography>
-        <Image
-          style={styles.arrow}
-          source={require("@/assets/icons/arrow-select.png")}
-        />
+        <IconArrow style={styles.icon} />
       </TouchableOpacity>
       <Modal isOpen={isOpen}>
         <View style={styles.modalContent}>
@@ -94,15 +91,9 @@ export const FormSelect = ({
                 <Typography>{option.label}</Typography>
                 <Typography>
                   {option.value === value ? (
-                    <Image
-                      style={styles.arrow}
-                      source={require("@/assets/icons/radio-checked.png")}
-                    />
+                    <IconChecked style={styles.icon} />
                   ) : (
-                    <Image
-                      style={styles.arrow}
-                      source={require("@/assets/icons/radio-unchecked.png")}
-                    />
+                    <IconUnchecked style={styles.icon} />
                   )}
                 </Typography>
               </TouchableOpacity>
@@ -150,7 +141,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  arrow: {
+  icon: {
     width: 24,
     height: 24,
   },
@@ -159,7 +150,6 @@ const styles = StyleSheet.create({
     paddingBottom: 100,
     paddingHorizontal: SPACING.md,
     width: "100%",
-    gap: SPACING.sm,
   },
   option: {
     justifyContent: "space-between",
