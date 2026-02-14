@@ -1,5 +1,5 @@
-import { COLORS, SPACING } from "@/tokens";
-import { Fragment, useState } from "react";
+import { COLORS, FONT_SIZES, SPACING } from "@/tokens";
+import { Fragment, useEffect, useState } from "react";
 import {
   type StyleProp,
   type TextInputProps,
@@ -7,11 +7,16 @@ import {
   Image,
   Keyboard,
   StyleSheet,
-  Text,
   TextStyle,
   TouchableOpacity,
   View,
 } from "react-native";
+import Animated, {
+  interpolate,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
 import { Divider, ErrorText, Modal, Typography } from "./ui";
 
 interface Option {
@@ -40,10 +45,26 @@ export const FormSelect = ({
   ...rest
 }: FormSelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const progress = useSharedValue(!!value || isOpen ? 1 : 0);
+
+  useEffect(() => {
+    progress.value = withTiming(!!value || isOpen ? 1 : 0, { duration: 150 });
+  }, [value, isOpen]);
+
+  const labelStyle = useAnimatedStyle(() => ({
+    top: interpolate(progress.value, [0, 1], [SPACING.lg, 0]),
+    fontSize: interpolate(
+      progress.value,
+      [0, 1],
+      [FONT_SIZES.md, FONT_SIZES.xs],
+    ),
+  }));
 
   return (
     <View style={[styles.inputContainer, styleContainer]}>
-      <Text style={styles.label}>{placeholder + (required ? "*" : "")}</Text>
+      <Animated.Text style={[styles.label, labelStyle]}>
+        {placeholder + (required ? "*" : "")}
+      </Animated.Text>
       <TouchableOpacity
         style={styles.select}
         onPress={() => {

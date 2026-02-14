@@ -12,7 +12,11 @@ import {
 } from "react-native";
 
 import { Divider } from "../../ui";
-import { registerDefaultValues, registerSchema } from "./constants";
+import {
+  genderOptions,
+  registerDefaultValues,
+  registerSchema,
+} from "./constants";
 
 export const RegisterForm = () => {
   const {
@@ -104,10 +108,7 @@ export const RegisterForm = () => {
                 value={value}
                 placeholder="Пол"
                 required
-                options={[
-                  { label: "Мужской", value: "male" },
-                  { label: "Женский", value: "female" },
-                ]}
+                options={genderOptions}
               />
             )}
           />

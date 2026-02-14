@@ -25,6 +25,11 @@ export const registerDefaultValues = {
   fio: "",
   email: "",
   phone: "",
-  gender: "male",
+  gender: "",
   agreement: false,
 };
+
+export const genderOptions = [
+  { label: "Мужской", value: "male" },
+  { label: "Женский", value: "female" },
+];
